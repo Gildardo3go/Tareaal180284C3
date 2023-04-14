@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Procesamiento de formulario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+            background-color: #3e8e41;
+        }
+        
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Procesamiento de formulario</h1>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Procesar la entrada de datos
+            $nombre = mysqli_real_escape_string($conn, $_POST['nombre']);
+            $edad = mysqli_real_escape_string($conn, $_POST['edad']);
+
+            // Ejecutar la consulta
+            $sql = "INSERT INTO usuarios (nombre, edad) VALUES ('$nombre', '$edad')";
+
+            if (mysqli_query($conn, $sql)) {
+                echo "<p>Registro creado correctamente</p>";
+            } else {
+                echo "<p class='error'>Error: " . $sql . "<br>" . mysqli_error($conn) . "</p>";
+            }
+        }
+        ?>
+        <form method="POST">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" required>
+            <label for="edad">Edad:</label>
+            <input type="number" name="edad" id="edad" required>
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+</body>
+</html>
