@@ -45,8 +45,10 @@
 <body>
 	<div class="container">
 		<h1>Gildardo Guzman Ortiz</h1>
-		
-		<a href="Practica de software seguro.html"><button>Ir a la tarea</button></a>
+		<h1>Seguridad en computo</h1>
+
+		<a href="Practica de software seguro.html">
+		<button>Ir a la tarea</button></a>
 	</div>
 </body>
 </html>
