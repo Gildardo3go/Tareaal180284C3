@@ -8,15 +8,6 @@
             background-color: #f5f5f5;
         }
         
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-        }
         
         h1 {
             font-size: 36px;
@@ -63,31 +54,28 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Procesamiento de formulario</h1>
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Procesar la entrada de datos
-            $nombre = mysqli_real_escape_string($conn, $_POST['nombre']);
-            $edad = mysqli_real_escape_string($conn, $_POST['edad']);
+    
+    <!DOCTYPE html>
+<html>
+<head>
+	<title>Formulario de Registro</title>
+</head>
+<body>
+	<h1>Registro de Usuario</h1>
+	<form method="POST" action="procesar_registro.php">
+		<label for="nombre">Nombre:</label>
+		<input type="text" id="nombre" name="nombre" required><br><br>
+		<label for="apellido">Apellido:</label>
+		<input type="text" id="apellido" name="apellido" required><br><br>
+		<label for="correo">Correo electrónico:</label>
+		<input type="email" id="correo" name="correo" required><br><br>
+		<label for="contrasena">Contraseña:</label>
+		<input type="password" id="contrasena" name="contrasena" required><br><br>
+		<input type="submit" value="Registrar">
+	</form>
+</body>
+</html>
 
-            // Ejecutar la consulta
-            $sql = "INSERT INTO usuarios (nombre, edad) VALUES ('$nombre', '$edad')";
-
-            if (mysqli_query($conn, $sql)) {
-                echo "<p>Registro creado correctamente</p>";
-            } else {
-                echo "<p class='error'>Error: " . $sql . "<br>" . mysqli_error($conn) . "</p>";
-            }
-        }
-        ?>
-        <form method="POST">
-            <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" id="nombre" required>
-            <label for="edad">Edad:</label>
-            <input type="number" name="edad" id="edad" required>
-            <input type="submit" value="Enviar">
-        </form>
-    </div>
+    
 </body>
 </html>
